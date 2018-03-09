@@ -17,14 +17,14 @@
             });
             var three = mathbox.three;
 
-            three.camera.position.set(5.5, .5, -2.3);
+            three.camera.position.set(1.0, .5, -1.0);
             three.renderer.setClearColor(new THREE.Color(0x394144), 1.0);
 
             var objs = null
             var time = 0
             var scrub = 0
             three.on('update', function () {
-            clock = three.Time.frames / 60
+            clock = three.Time.frames / 160
             time = clock
 
             t = Math.max(clock, 0) / 2
@@ -43,6 +43,35 @@
             f = t / 3.71;
             c = Math.cos(f);
             s = Math.sin(f);
+
+            if( getRandomArbitrary(0, 100.0)  <= 0.20 )
+            {
+            view
+            .transform({
+            classes: ['surface'],
+            position: [0, .75, 0],
+            scale: [1, 1, π],
+            })
+            .surface({
+            width: 2,
+            zBias: 2,
+            color: 0x000000,
+            fill:  false,
+            lineY: true,
+            });
+
+            view
+            .transform({
+            classes: ['surface'],
+            position: [0, .75, 0],
+            scale: [1, 1, π],
+            })            
+            .surface({
+            width: 2,
+            color: getRandomColor(),
+            shaded: true
+            });            
+            }
 
             if (objs)
             objs.set('quaternion', [-s, 0, 0, c]);
@@ -146,6 +175,10 @@
             }
             return color;
             }            
+
+            function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
+            }       
 
             view
             .transform({
