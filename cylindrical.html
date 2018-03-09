@@ -18,7 +18,7 @@
             var three = mathbox.three;
 
             three.camera.position.set(5.5, .5, -2.3);
-            three.renderer.setClearColor(new THREE.Color(0xcccccc), 1.0);
+            three.renderer.setClearColor(new THREE.Color(0x394144), 1.0);
 
             var objs = null
             var time = 0
@@ -70,8 +70,8 @@
             divideY: 10,
             axes: 'xz',
             blending: 'add',
-            color: 0x00F0B0,
-            opacity: .2,
+            color: 0xFFFFFF,
+            opacity: 1.0,
             })
 
             view
@@ -87,8 +87,8 @@
             divideY: 3,
             axes: 'xz',
             blending: 'add',
-            color: 0x00F0B0,
-            opacity: .2,
+            color: 0xFFFFFF,
+            opacity: 1.0,
             })
 
             view
@@ -104,8 +104,8 @@
             divideY: 3,
             axes: 'xz',
             blending: 'add',
-            color: 0x00F0B0,
-            opacity: .36,
+            color: 0xFFFFFF,
+            opacity: 1.0,
             })
 
             view.interval({
@@ -121,19 +121,31 @@
             },
             channels: 3,
             });
+
             view.split({
             axis: 'width',
             length: 2,
             });
+
             view.spread({
             unit: 'absolute',
             width: [0, 0, .03/π, 0],
             id: 'split',
             });
+
             view.transpose({
             order: "xzyw",
             id: 'strips',
             });
+
+            function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+            }            
 
             view
             .transform({
@@ -148,15 +160,16 @@
             fill:  false,
             lineY: true,
             });
+
             view
             .transform({
             classes: ['surface'],
             position: [0, .75, 0],
             scale: [1, 1, π],
-            })
+            })            
             .surface({
             width: 2,
-            color: 0xef121c,
+            color: getRandomColor(),
             shaded: true
             });
 
