@@ -13,6 +13,18 @@
         <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
         <link rel="stylesheet" href="assets/css/main.css" />
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+
+
+	<script language="javascript"> 
+	function setCookie(nome, valor, dias){ 
+	diasms = (new Date()) .getTime() + 1000 * 3600 * 24 * dias; 
+	dias = new Date(diasms); 
+	expires = dias.toGMTString(); 
+	document.cookie = escape(nome) + "=" + escape(valor) + "; expires=" + expires; 
+	} 
+	</script>
+
+
     </head>
     <body class="subpage">
         <div id="page-wrapper">
@@ -67,6 +79,7 @@
                                 <section>
                                     <header>
                                         <h2>Aprendizado de Máquina - 2019.2</h2>
+					<h3 id='visitas'></h3>
                                     </header>
 
                                     <h3>Material de aula.</h3>
@@ -238,6 +251,24 @@
     <script src="assets/js/util.js"></script>
     <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
     <script src="assets/js/main.js"></script>
+
+		
+	<script language="javascript">
+	window.onload =  function() {
+		if (!document.cookie){
+		setCookie("prof_daniel_ml", "1", 365);
+		$("#visitas").text("Suas Visitas: 1")
+		} else {
+		var cont = document.cookie;
+		var dividindo = cont.split("=");
+		var numero = parseInt(dividindo[1]);
+		var soma = numero + 1;
+		$("#visitas").text("Suas Visitas: " + soma)
+		setCookie("prof_daniel_ml", soma, 365);
+		}
+	};
+	</script>
+
 
 </body>
 </html>
