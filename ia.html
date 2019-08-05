@@ -257,13 +257,25 @@
 		
 	<script language="javascript">
 	window.onload =  function() {
-		if (!document.cookie){
+		function getCookie(cname) {
+		    var name = cname + "=";
+		    var ca = document.cookie.split(';');
+		    for(var i=0; i<ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1);
+			if (c.indexOf(name) == 0) {
+			    return c.substring(name.length, c.length);
+			}
+		    }
+		    return "";
+		}
+
+		var page_num=getCookie("prof_daniel_ia");
+		if (page_num.length == 0) {
 		setCookie("prof_daniel_ia", "1", 365);
 		$("#visitas").text("Suas Visitas: 1")
 		} else {
-		var cont = document.cookie;
-		var dividindo = cont.split("=");
-		var numero = parseInt(dividindo[1]);
+		var numero = parseInt(page_num);
 		var soma = numero + 1;
 		$("#visitas").text("Suas Visitas: " + soma)
 		setCookie("prof_daniel_ia", soma, 365);
